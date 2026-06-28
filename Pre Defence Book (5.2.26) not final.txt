@@ -1,0 +1,155 @@
+📘 THESIS PRE-DEFENSE BOOK (DRAFT v1)
+1. Introduction
+
+Recent advancements in Retrieval-Augmented Generation (RAG) systems have significantly improved the ability of language models to generate accurate, context-aware responses by grounding them in external knowledge sources. However, most existing research focuses on high-resource languages such as English, while low-resource languages like Bangla remain underexplored, particularly in retrieval evaluation.
+
+This thesis focuses on building and evaluating retrieval strategies for Bangla document-based RAG systems. The goal is to systematically compare different retrieval approaches such as lexical (BM25), dense retrieval, and hybrid methods using a large-scale Bangla corpus.
+
+We construct a retrieval benchmark from Bangla Wikipedia articles, consisting of over 480,000 document chunks and approximately 1,957 question-answer pairs generated using large language models.
+
+2. Motivation
+
+Despite the rapid growth of NLP systems, Bangla language support in retrieval-based systems remains limited. Most RAG systems are optimized for English datasets, and there is a lack of standardized benchmarks for Bangla retrieval evaluation.
+
+The motivation of this work is:
+
+To create a large-scale Bangla retrieval corpus
+To evaluate multiple retrieval strategies under a unified framework
+To identify strengths and weaknesses of BM25 and dense retrieval methods for Bangla text
+To build a reproducible evaluation pipeline for future Bangla NLP research
+3. Research Highlights
+Built a large-scale Bangla Wikipedia corpus with 481,510 text chunks
+Generated 1,957 QA pairs using LLM-based question generation
+Designed a retrieval evaluation framework based on QA-to-chunk mapping
+Implemented dataset validation pipeline to ensure consistency
+Developed preprocessing and recovery scripts to fix corrupted LLM-generated datasets
+Identified and resolved multiple issues in dataset formatting (JSON vs JSONL inconsistency, trailing commas, malformed objects)
+4. Literature Review (Draft Level)
+
+Existing work in Retrieval-Augmented Generation primarily focuses on:
+
+BM25-based sparse retrieval systems
+Dense retrieval models such as DPR, Sentence-BERT, and multilingual embedding models
+Hybrid retrieval approaches combining lexical and semantic matching
+
+However, most studies are limited to English or high-resource languages. Recent multilingual models (e.g., multilingual E5, mBERT-based encoders) show promise but lack thorough evaluation in Bangla-specific corpora.
+
+There is a notable research gap in:
+
+Large-scale Bangla retrieval benchmarks
+Systematic comparison of retrieval strategies for Bangla text
+Evaluation datasets combining Wikipedia-scale corpora with QA-based retrieval tasks
+5. Dataset Description
+
+The dataset used in this study consists of three main components:
+
+5.1 Raw Corpus
+Source: Bangla Wikipedia dump
+Processed into structured articles
+5.2 Chunked Corpus
+Total chunks: 481,510
+Each chunk contains:
+chunk_id
+doc_id
+title
+text
+source (Wikipedia)
+5.3 QA Dataset
+Total QA pairs: 1,957
+Each QA pair contains:
+question
+answer
+chunk_id (ground truth passage)
+doc_id
+source
+5.4 Dataset Construction Notes
+QA pairs were generated using ChatGPT by providing individual chunks
+Initial dataset contained formatting inconsistencies (JSON array vs JSONL issues)
+Multiple parsing and recovery scripts were developed to fix:
+trailing commas
+invalid JSON objects
+mixed formatting structures
+Final dataset was validated to ensure:
+0 missing chunk references
+0 duplicate questions
+full corpus alignment
+6. Data Balancing
+
+At this stage, explicit balancing techniques were not applied.
+
+However:
+
+QA pairs are distributed across multiple Wikipedia articles
+Chunk distribution is naturally skewed due to Wikipedia structure
+Future work will explore balancing across topics and document lengths
+7. Methodology
+
+The proposed system follows a retrieval evaluation pipeline:
+
+Step 1: Corpus Preparation
+Wikipedia articles are cleaned and split into 481,510 chunks
+Step 2: Query Construction
+1,957 QA pairs are used as evaluation queries
+Step 3: Retrieval Models (Planned & In Progress)
+
+We will evaluate:
+
+BM25 (Sparse Retrieval)
+Rank-based lexical matching
+Dense Retrieval
+Sentence embedding models (e.g., multilingual E5 / SBERT)
+Approximate nearest neighbor search using FAISS
+Hybrid Retrieval
+Combination of BM25 and dense scores
+Step 4: Evaluation Metrics
+Recall@1
+Recall@5
+Recall@10
+Mean Reciprocal Rank (MRR)
+8. Result Analysis (Current Progress)
+
+At this stage, retrieval experiments are not yet completed.
+
+However, the following progress has been made:
+
+Dataset successfully constructed and validated
+Corpus indexing pipeline prepared
+BM25 baseline implementation is under development
+Retrieval evaluation framework designed
+
+Expected results will compare:
+
+Sparse vs Dense retrieval performance
+Trade-offs in speed vs accuracy
+Impact of retrieval method on Bangla QA matching
+9. Result Summary (Planned)
+
+The final study will summarize:
+
+Performance of BM25 on large-scale Bangla corpus
+Performance of dense retrieval models
+Improvement achieved through hybrid retrieval
+Effectiveness of retrieval strategies for Bangla RAG systems
+10. Limitations
+
+Current limitations include:
+
+QA pairs are generated using LLM, which may introduce bias or noise
+No manual human annotation of relevance labels
+Dataset is primarily Wikipedia-based (limited domain diversity)
+Initial dataset required significant cleaning due to formatting inconsistencies
+Computational cost of dense retrieval over large corpus may be high
+11. Conclusion (Current Stage)
+
+This work presents an ongoing effort to build a large-scale Bangla retrieval evaluation framework. A substantial corpus and QA dataset have already been constructed and validated. The retrieval models are currently under implementation, starting with BM25 as a baseline.
+
+12. Future Work
+
+Future directions include:
+
+Implementation of dense retrieval models using multilingual embeddings
+Integration of FAISS-based approximate nearest neighbor search
+Hybrid retrieval system combining BM25 and dense vectors
+Expansion beyond Wikipedia to include news, educational, and government datasets
+Manual evaluation and human validation of QA pairs
+Development of a full Bangla RAG system with generation evaluation

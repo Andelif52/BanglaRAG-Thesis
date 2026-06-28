@@ -1,0 +1,27 @@
+# Virtual environment
+venv-py311/
+venv/
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Python installer
+Python-3.11.15/
+
+# Raw datasets
+bnwiki-latest-pages-articles.xml
+bnwiki_clean.jsonl
+bnwiki_cleaned.jsonl
+bnwiki_chunks.jsonl
+
+# FAISS / embeddings
+*.index
+*.npy
+*.pkl
+
+# ZIP files
+*.zip
+
+# Generated outputs
+outputs/

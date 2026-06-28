@@ -1,0 +1,4 @@
+[console_scripts]
+extractPage = wikiextractor.extractPage:main
+wikiextractor = wikiextractor.WikiExtractor:main
+
